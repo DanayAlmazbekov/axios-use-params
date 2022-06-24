@@ -3,27 +3,27 @@ import { Box, padding } from "@mui/system";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const AddProduct = ({ addProduct }) => {
+const AddContact = ({ addContact }) => {
   const navigate = useNavigate();
   // console.log(navigate);
-  const [title, setTitle] = useState("");
-  const [price, setPrice] = useState("");
-  const [image, setImage] = useState("");
+  const [name, setName] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [number, setNumber] = useState("");
   function handleSave() {
-    if (!title || !price || !image) {
+    if (!name || !lastname || !number) {
       alert("Enter Fields!");
     } else {
-      let newProduct = {
-        title,
-        price,
-        image,
+      let newContact = {
+        name,
+        lastname,
+        number,
       };
-      addProduct(newProduct);
-      // console.log(newProduct);
+      addContact(newContact);
+
       navigate("/");
     }
   }
-  // console.log(title);
+
   return (
     <Box
       style={{
@@ -33,38 +33,41 @@ const AddProduct = ({ addProduct }) => {
         marginTop: "50px",
       }}>
       <TextField
-        value={title}
-        label="Title"
+        value={name}
+        label="name"
         variant="outlined"
-        onChange={e => setTitle(e.target.value)}
+        onChange={e => setName(e.target.value)}
         style={{ backgroundColor: "white" }}
       />
       <TextField
-        value={price}
-        label="Price"
+        value={lastname}
+        label="lastname"
         variant="outlined"
-        onChange={e => setPrice(e.target.value)}
+        onChange={e => setLastname(e.target.value)}
         style={{
           backgroundColor: "white",
           marginTop: "9px",
         }}
       />
       <TextField
-        value={image}
-        label="Image"
+        value={number}
+        label="number"
         variant="outlined"
-        onChange={e => setImage(e.target.value)}
+        onChange={e => setNumber(e.target.value)}
         style={{ backgroundColor: "white", marginTop: "9px" }}
       />
       <Button
         onClick={() => handleSave()}
         sx={{ m: 1 }}
         variant="contained"
-        style={{ borderRadius: "100px", backgroundColor: "green" }}>
+        style={{
+          borderRadius: "100px",
+          backgroundColor: "green",
+        }}>
         Save
       </Button>
     </Box>
   );
 };
 
-export default AddProduct;
+export default AddContact;

@@ -1,15 +1,19 @@
 import React, { useEffect } from "react";
-import ProductCard from "../Card/Card";
+import ContactCard from "../Card/Card";
 
-const List = ({ getProducts, products }) => {
-  console.log(products);
+const List = ({ getContacts, contacts, deleteContact }) => {
+  // console.log(products);
   useEffect(() => {
-    getProducts();
+    getContacts();
   }, []);
   return (
-    <div>
-      {products.map(item => (
-        <ProductCard key={item.id} item={item} />
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+      }}>
+      {contacts.map(item => (
+        <ContactCard key={item.id} item={item} deleteContact={deleteContact} />
       ))}
     </div>
   );

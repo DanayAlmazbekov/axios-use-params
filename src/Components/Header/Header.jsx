@@ -5,7 +5,6 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -43,7 +42,6 @@ const Header = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -58,19 +56,10 @@ const Header = () => {
               color: "inherit",
               textDecoration: "none",
             }}>
-            DANAY
+            Contact Book
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            {/* <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit">
-              <MenuIcon />
-            </IconButton> */}
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
@@ -114,43 +103,12 @@ const Header = () => {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {/* {pages.map(page => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}>
-                {page}
-              </Button>
-            ))} */}
-
-            <Link to="/pokemons2">
-              <Button
-                sx={{ m: 1 }}
-                variant="contained"
-                color={
-                  location.pathname === "/pokemons2" ? "success" : "primary"
-                }>
-                Pokemons
-              </Button>
-            </Link>
-
-            <Link to="/rickandmorty">
-              <Button
-                sx={{ m: 1 }}
-                variant="contained"
-                color={
-                  location.pathname === "/rickandmorty" ? "success" : "primary"
-                }>
-                RickAndMorty
-              </Button>
-            </Link>
-
             <Link to="/add">
               <Button
                 sx={{ m: 1 }}
                 variant="contained"
                 color={location.pathname === "/add" ? "success" : "primary"}>
-                Add Product
+                Add Contact
               </Button>
             </Link>
           </Box>
@@ -158,10 +116,7 @@ const Header = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar
-                  alt="Remy Sharp"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToameh-IpAYkMcNnN-ktyKgVda4dmYSYKDTa-1PbgkT6WPyZcr_vrQ_UaVv44z3bUNp5g&usqp=CAU"
-                />
+                <Avatar alt="Remy Sharp" src="" />
               </IconButton>
             </Tooltip>
             <Menu

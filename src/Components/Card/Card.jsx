@@ -7,25 +7,28 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 
-export default function ProductCard({ item }) {
+export default function ContactCard({ item, deleteContact }) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardMedia
-        component="img"
-        height="160"
-        image={item.image}
-        alt="green iguana"
-      />
+    <Card
+      style={{
+        margin: "30px",
+      }}
+      sx={{ maxWidth: 300 }}>
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {item.title}
+          {item.name}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {item.price}
+        <Typography gutterBottom variant="h5" component="div">
+          {item.lastname}
+        </Typography>
+        <Typography gutterBottom variant="h5" component="div">
+          {item.number}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Delete</Button>
+        <Button onClick={() => deleteContact(item.id)} size="small">
+          Delete
+        </Button>
         <Link to={`/edit/${item.id}`}>
           <Button size="small">Edit</Button>
         </Link>

@@ -1,71 +1,88 @@
 import Header from "./Components/Header/Header";
-import Pokemons from "./Components/Pokemons/Pokemons";
-import Pokemons2 from "./Components/Pokemons2/Pokemons2";
-import RickAndMorty from "./Components/RickAndMorty/RickAndMorty";
-import AddProduct from "./Components/AddProduct/AddProduct";
-import Users from "./Components/Users/Users";
+
 import "./App.css";
-import { Paper, Rating } from "@mui/material";
+
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import axios from "axios";
 import List from "./Components/List/List";
 import { useState } from "react";
 import Edit from "./Components/Edit/Edit";
+import AddContact from "./Components/AddContact/AddContact";
 
 function App() {
-  //! CRUD - Create Read Update Delete
+  //! CRUD
   //! Create - POST запрос
 
-  const API = "http://localhost:8000/products";
+  const API = "http://localhost:8000/contacts";
 
-  //! для хранения данных
-  const [products, setProducts] = useState([]);
+  const [contacts, setContacts] = useState([]);
+  const [oneContact, setOneContact] = useState(null);
 
   //! Create - POST
 
-  async function addProduct(newProduct) {
-    await axios.post(API, newProduct);
-    getProducts();
+  async function addContact(newContact) {
+    await axios.post(API, newContact);
+    getContacts();
   }
 
   //! READ - GET
-  async function getProducts() {
+  async function getContacts() {
     let res = await axios(API);
-    setProducts(res.data);
+    setContacts(res.data);
     // console.log("from app.js", res);
   }
   // console.log(products);
 
+  //! DELETE
+  async function deleteContact(id) {
+    await axios.delete(`${API}/${id}`);
+    getContacts();
+  }
+
+  //! Detailed request, edit - GET API/id
+  async function getOneContact(id) {
+    let res = await axios(`${API}/${id}`);
+    // console.log(res.data);
+    setOneContact(res.data);
+  }
+
+  //! Update
+  async function updateContact(id, editedContact) {
+    await axios.patch(`${API}/${id}`, editedContact);
+    getContacts();
+  }
+  // console.log(oneProduct);
   return (
-    // указываем что роутинг будет в браузере
     <BrowserRouter>
-      {/* header будет на всех наших страницах */}
       <Header />
-      {/* для перечисления роутов */}
+
       <Routes>
-        {/* непосредственно сами роуты */}
         <Route
           path="/"
-          element={<List products={products} getProducts={getProducts} />}
+          element={
+            <List
+              deleteContact={deleteContact}
+              contacts={contacts}
+              getContacts={getContacts}
+            />
+          }
         />
-        <Route path="/pokemons" element={<Pokemons />} />
-        <Route path="/pokemons2" element={<Pokemons2 />} />
-        <Route path="rickandmorty" element={<RickAndMorty />} />
-        <Route path="/add" element={<AddProduct addProduct={addProduct} />} />
-        <Route path="/edit/:id" element={<Edit />} />
+
+        <Route path="/add" element={<AddContact addContact={addContact} />} />
+        <Route
+          path="/edit/:id"
+          element={
+            <Edit
+              oneContact={oneContact}
+              getOneContact={getOneContact}
+              updateContact={updateContact}
+            />
+          }
+        />
       </Routes>
-      {/* footer будет на всех страницах */}
-      <h1>Footer</h1>
+
+      <h1></h1>
     </BrowserRouter>
-    // <div>
-    //   <Header />
-    //   <Pokemons2 />
-    //   <Rating />
-    //   <Paper />
-    //   <Pokemons />
-    //   <RickAndMorty />
-    //   <Users />
-    // </div>
   );
 }
 
